@@ -2,6 +2,9 @@
 Informations Retrieval Library
 ==============================
 LM is an implementation of ngram Language Model 
+
+This file is taken from irlib,
+https://github.com/gr33ndata/irlib
 '''
 
 # Author: Tarek Amr <@gr33ndata> 
@@ -337,9 +340,11 @@ class LM:
         ngram_n_1 = self.joiner.join(ngram[:-1])
         ngram_n_count = self.term_count_n[doc_id]['ngrams'].get(ngram_n,0)
         ngram_n_1_count = self.term_count_n_1[doc_id]['ngrams'].get(ngram_n_1,0)
+        #print ngram, ngram_n_count, ngram_n_1_count #DEBUG
         # Apply smoothing
         if self.smoothing == 'Laplace':
             pr = self.laplace(ngram_n_count, ngram_n_1_count, doc_id)
+            #print pr #DEBUG
             if self.corpus_mix == 'c' or self.corpus_mix == 'l':
                 corpus_ngram_n_count = self.corpus_count_n['ngrams'].get(ngram_n,0)
                 corpus_ngram_n_1_count = self.corpus_count_n_1['ngrams'].get(ngram_n_1,0)
