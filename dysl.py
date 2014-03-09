@@ -3,19 +3,18 @@ import codecs
 
 from dyslib.lm import LM
 
+
 corpora = {
-    'English': 'corpora/en.txt',
-    'Spanish': 'corpora/es.txt',
-    'French': 'corpora/fr.txt',
-    'Arabic': 'corpora/ar.txt',
-    'Arabizi': 'corpora/ar-latin.txt',
+    'English': 'corpus-5langs/en.txt',
+    'Spanish': 'corpus-5langs/es.txt',
+    'French': 'corpus-5langs/fr.txt',
+    'Arabic': 'corpus-5langs/ar.txt',
+    'Arabizi': 'corpus-5langs/ar-latin.txt',
 }
 
 def term2ch(text):
     return [ch for ch in text]
 
-# f = codecs.open('unicode.rst', encoding='utf-8')
-# lm.add_doc(doc_id='apple', doc_terms=term2ch('the tree is full or apples'))
 
 def readfile(filename):
     f = codecs.open(filename, encoding='utf-8')
@@ -25,7 +24,13 @@ def readfile(filename):
     return tokenz
 
 
-def main():
+class MyLM(LM):
+
+    def classify(self, text=u''):
+        result = self.calculate(doc_terms=term2ch(text))
+        return (result['calc_id'], 0)
+
+def main_cli():
     
     ngram = 3
     lrpad = u' '
@@ -34,8 +39,9 @@ def main():
     lm = LM(n=ngram, verbose=verbose, lpad=lrpad, rpad=lrpad, 
             smoothing='Laplace', laplace_gama=0.1, 
             corpus_mix='l')
+
     for lang in corpora:
-        print lang
+        print 'Training on language,', lang
         lm.add_doc(doc_id=lang, doc_terms=readfile(corpora[lang]))
 
     intxt = u''
@@ -46,5 +52,40 @@ def main():
     result = lm.calculate(doc_terms=term2ch(intxt))
     print result['calc_id']
 
+def main_esaren():
+
+    ngram = 3
+    lrpad = u' '
+    verbose=False
+
+    lm = MyLM(n=ngram, verbose=verbose, lpad=lrpad, rpad=lrpad, 
+            smoothing='Laplace', laplace_gama=0.1, 
+            corpus_mix='l')
+
+    import corpuslib
+    train = corpuslib.Train()
+    corpus = train.get_corpus()
+
+    for item in corpus:
+        lm.add_doc(doc_id=item[0], doc_terms=readfile(item[1]))
+
+    a = corpuslib.Accuracy()
+    t = corpuslib.Test(root='', langid=lm, accuracy=a)
+    t.start()
+    a.evaluate()
+
+
 if __name__ == '__main__':
-    main()
+
+    import cProfile
+    import pstats
+
+    # For an interactive mode
+    #main_cli()
+
+    # For training and testing esaren corpus
+    #main_esaren()
+    cProfile.run('main_esaren()','train_prof')
+    p_stats = pstats.Stats('train_prof')
+    p_stats.sort_stats('time').print_stats(10)
+
