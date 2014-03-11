@@ -9,14 +9,14 @@ class Test:
         if root:
             self.root = root
         else:
-            self.root = '../corpora/corpus-esaren.test'
+            self.root = 'corpora/corpus-esaren.test'
         self.langid = langid
         self.a = accuracy
 
     def visit(self, arg, dirname, names):
         path = dirname.split('/')
 
-        if len(path) == 3:
+        if len(path) == 2:
             #print names
             for i in range(len(names)-1,0,-1):
                 if names[i].startswith('.'):
