@@ -3,13 +3,15 @@ import codecs
 
 from dyslib.lm import LM
 
+# Corpora should have their own libs 
+sys.path.append('../corpora')
 
 corpora = {
-    'English': 'corpus-5langs/en.txt',
-    'Spanish': 'corpus-5langs/es.txt',
-    'French': 'corpus-5langs/fr.txt',
-    'Arabic': 'corpus-5langs/ar.txt',
-    'Arabizi': 'corpus-5langs/ar-latin.txt',
+    'English': '../corpora/corpus-5langs/en.txt',
+    'Spanish': '../corpora/corpus-5langs/es.txt',
+    'French': '../corpora/corpus-5langs/fr.txt',
+    'Arabic': '../corpora/corpus-5langs/ar.txt',
+    'Arabizi': '../corpora/corpus-5langs/ar-latin.txt',
 }
 
 def term2ch(text):
@@ -17,6 +19,7 @@ def term2ch(text):
 
 
 def readfile(filename):
+    #print 'readfile', filename
     f = codecs.open(filename, encoding='utf-8')
     tokenz = term2ch(f.read())
     f.close()
