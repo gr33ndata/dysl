@@ -9,17 +9,22 @@ class Train:
         if root:
             self.root = root
         else:
-            self.root = 'corpora/corpus-esaren'
-
+            #self.root = 'corpora/corpus-esaren'
+            self.root = __file__.rsplit('/',2)[0] + '/corpus-esaren'
+        #print self.root
+        self.root_depth = len(self.root.split('/')) 
+           
     def get_corpus(self):
         self.corpus = []
         self.load()
         return self.corpus
 
     def visit(self, arg, dirname, names):
+        #print dirname
         path = dirname.split('/')
+        #print 'path:', path, len(path)
 
-        if len(path) == 4:
+        if len(path) == self.root_depth + 2:
             lang = path[-1]
             names = [name for name in names if not name.startswith('.')]
 

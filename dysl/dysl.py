@@ -3,8 +3,6 @@ import codecs
 
 from dyslib.lm import LM
 
-# Corpora should have their own libs 
-sys.path.append('corpora')
 
 corpora = {
     'English': 'corpora/corpus-5langs/en.txt',
@@ -38,10 +36,12 @@ def main_cli():
     ngram = 3
     lrpad = u' '
     verbose=True
+    #corpus_mix='l'
+    corpus_mix=0
 
     lm = LM(n=ngram, verbose=verbose, lpad=lrpad, rpad=lrpad, 
             smoothing='Laplace', laplace_gama=0.1, 
-            corpus_mix='l')
+            corpus_mix=corpus_mix)
 
     for lang in corpora:
         print 'Training on language,', lang
@@ -51,29 +51,34 @@ def main_cli():
     for u in sys.argv[1:]:
         intxt = intxt + u.decode('utf-8')
     
-    print term2ch(intxt)
+    #print term2ch(intxt)
     result = lm.calculate(doc_terms=term2ch(intxt))
-    print result['calc_id']
+    #print result['calc_id']
+    print result
 
 def main_esaren():
 
     ngram = 3
     lrpad = u' '
     verbose=False
+    corpus_mix='l'
 
     lm = MyLM(n=ngram, verbose=verbose, lpad=lrpad, rpad=lrpad, 
             smoothing='Laplace', laplace_gama=0.1, 
-            corpus_mix='l')
+            corpus_mix=corpus_mix)
 
-    import corpuslib
-    train = corpuslib.Train()
+    from corpora.corpuslib import Train, Test, Accuracy
+    #train = corpuslib.Train()
+    train = Train()
     corpus = train.get_corpus()
 
     for item in corpus:
         lm.add_doc(doc_id=item[0], doc_terms=readfile(item[1]))
 
-    a = corpuslib.Accuracy()
-    t = corpuslib.Test(root='', langid=lm, accuracy=a)
+    #a = corpuslib.Accuracy()
+    #t = corpuslib.Test(root='', langid=lm, accuracy=a)
+    a = Accuracy()
+    t = Test(root='', langid=lm, accuracy=a)
     t.start()
     a.evaluate()
 
@@ -96,4 +101,5 @@ if __name__ == '__main__':
         p_stats.sort_stats('time').print_stats(10)
     else:
         main_esaren()
+        pass
 

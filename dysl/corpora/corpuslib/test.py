@@ -9,14 +9,20 @@ class Test:
         if root:
             self.root = root
         else:
-            self.root = 'corpora/corpus-esaren.test'
+            #self.root = 'corpora/corpus-esaren.test'
+            self.root = __file__.rsplit('/',2)[0] + '/corpus-esaren.test'
+        #print self.root
+        self.root_depth = len(self.root.split('/')) 
+
         self.langid = langid
         self.a = accuracy
 
     def visit(self, arg, dirname, names):
+        #print dirname
         path = dirname.split('/')
+        #print 'path:', path, len(path), self.root_depth
 
-        if len(path) == 2:
+        if len(path) == self.root_depth:
             #print names
             for i in range(len(names)-1,0,-1):
                 if names[i].startswith('.'):
@@ -39,7 +45,7 @@ class Test:
                     if lang == res[0]:
                         self.a.update(correct=True)
                     else:
-                        print 'incorrect:', lang, res, line
+                        #print 'incorrect:', lang, res, line
                         self.a.update(correct=False)
                 fd.close()
 
