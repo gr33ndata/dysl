@@ -45,7 +45,10 @@ class Test:
                     if lang == res[0]:
                         self.a.update(correct=True)
                     else:
-                        #print 'incorrect:', lang, res, line
+                        if False:
+                            print 'incorrect:'
+                            print ' ', lang, 'detected as', res[0]
+                            print ' ', line
                         self.a.update(correct=False)
                 fd.close()
 
