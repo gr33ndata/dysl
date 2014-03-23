@@ -45,7 +45,7 @@ class Test:
                     #print lang, ':', res
                     karbasa = res[1]
                     if karbasa < 0.05:
-                        detected_lang = 'it'
+                        detected_lang = 'unk'
                     else:
                         detected_lang = res[0]
                     if lang == detected_lang:
