@@ -430,7 +430,8 @@ class LM:
             'prob': -1,
             'calc_id': '',
             'actual_id': actual_id,
-            'seen_unseen_count': (0,0)
+            'seen_unseen_count': (0,0),
+            'all_probs': []
         }
         terms = self.lr_padding(doc_terms)
         ngrams = self.to_ngrams(terms) 
@@ -451,7 +452,8 @@ class LM:
                     unseen_count += 1
             doc_pr += self.pr_doc(doc_id, doc_length=doc_length) 
             if self.verbose:            
-                print doc_id, actual_id, doc_pr  
+                print doc_id, actual_id, doc_pr 
+            calculated['all_probs'].append(doc_pr) 
             if calculated['prob'] == -1 or doc_pr < calculated['prob']:
                 calculated['prob'] = doc_pr
                 calculated['calc_id'] = doc_id

@@ -36,24 +36,56 @@ class Test:
                 filename = dirname + '/' + name
                 #print 'filename:', filename
                 fd = codecs.open(filename, encoding='utf-8')
-                #fd = open(filename,'r')
-                lines = fd.read()
-                #for line in fd.readlines():
-                for line in lines.split('\n'):
+                lines = fd.read().split('\n')
+                for line in lines:
+                    #print '=>', line
+                    line = self.langid.normalize(line)
+                    #print ':', line
                     res = self.langid.classify(line)
                     #print lang, ':', res
-                    if lang == res[0]:
+                    karbasa = res[1]
+                    if karbasa < 0.05:
+                        detected_lang = 'it'
+                    else:
+                        detected_lang = res[0]
+                    if lang == detected_lang:
                         self.a.update(correct=True)
                     else:
                         if False:
                             print 'incorrect:'
-                            print ' ', lang, 'detected as', res[0]
-                            print ' ', line
+                            print ' ', lang, 'detected as', detected_lang
+                            #print ' ', line
+                            print ' ', res 
                         self.a.update(correct=False)
+                    self.add_log(lang, detected_lang, karbasa, line)
                 fd.close()
 
     def start(self):
         os.path.walk(self.root, self.visit, '')    
+
+    def open_logfile(self, logfile_name='logs.csv'):
+        #self.logfd = open(logfile_name,'w')
+        self.logfd = codecs.open(logfile_name, encoding='utf-8', mode='w')
+        #self.logfd.write('What, ')
+
+    def close_logfile(self):
+        self.logfd.close()
+
+    def add_log(self, lang='', detected_lang='', karbasa=0, line=''):
+        if lang == detected_lang:
+            what = 'correct'
+        else:
+            what = 'incorrect'
+        what_txt = lang + '=>' + detected_lang
+        #print type(result[1]['all_probs']), result[1]['all_probs']
+        #result[1]['all_probs'].sort()
+        #probs = ','.join(map(str,result[1]['all_probs']))
+        #seenunseen = ','.join(map(str,result[1]['seen_unseen_count']))
+        #log_line = what + ',' + probs + ',' + seenunseen + ',' + what_txt + '\n'
+        log_line = what + ',' + str(karbasa) + ',' + what_txt + ',' + line.replace(',','') + '\n'
+        self.logfd.write(log_line)
+
+
 
 class Accuracy:
 

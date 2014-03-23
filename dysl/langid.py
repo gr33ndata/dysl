@@ -1,6 +1,7 @@
 import codecs
 
-from dyslib.lm import LM
+#from dyslib.lm import LM
+from social import SocialLM as LM
 from corpora.corpuslib import Train
 
 class LangID:
@@ -21,7 +22,7 @@ class LangID:
         f = codecs.open(filename, encoding='utf-8')
         filedata = f.read()
         f.close()
-        tokenz = [ch for ch in filedata]
+        tokenz = LM.tokenize(filedata, mode='c')
         #print tokenz
         return tokenz
 
@@ -36,7 +37,8 @@ class LangID:
     
     def classify(self, text=u''):
 
-        tokenz = [ch for ch in text]
+        text = self.lm.normalize(text)
+        tokenz = LM.tokenize(text, mode='c')
         result = self.lm.calculate(doc_terms=tokenz)
         lang = result['calc_id']
         return lang
@@ -45,6 +47,6 @@ if __name__ == '__main__':
 
     l = LangID()
     l.train()
-    text = u'Hello, World'
+    text = u'hello, world'
     lang = l.classify(text)
     print text, '[ Language:', lang, ']'

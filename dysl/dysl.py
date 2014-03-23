@@ -1,7 +1,8 @@
 import sys
 import codecs
 
-from dyslib.lm import LM
+#from dyslib.lm import LM
+from social import SocialLM as LM
 
 
 corpora = {
@@ -12,24 +13,14 @@ corpora = {
     'Arabizi': 'corpora/corpus-5langs/ar-latin.txt',
 }
 
-def term2ch(text):
-    return [ch for ch in text]
-
 
 def readfile(filename):
     #print 'readfile', filename
     f = codecs.open(filename, encoding='utf-8')
-    tokenz = term2ch(f.read())
+    tokenz = LM.tokenize(f.read())
     f.close()
     #print tokenz
     return tokenz
-
-
-class MyLM(LM):
-
-    def classify(self, text=u''):
-        result = self.calculate(doc_terms=term2ch(text))
-        return (result['calc_id'], 0)
 
 def main_cli():
     
@@ -63,7 +54,7 @@ def main_esaren():
     verbose=False
     corpus_mix='l'
 
-    lm = MyLM(n=ngram, verbose=verbose, lpad=lrpad, rpad=lrpad, 
+    lm = LM(n=ngram, verbose=verbose, lpad=lrpad, rpad=lrpad, 
             smoothing='Laplace', laplace_gama=0.1, 
             corpus_mix=corpus_mix)
 
@@ -79,7 +70,9 @@ def main_esaren():
     #t = corpuslib.Test(root='', langid=lm, accuracy=a)
     a = Accuracy()
     t = Test(root='', langid=lm, accuracy=a)
+    t.open_logfile()
     t.start()
+    t.close_logfile()
     a.evaluate()
 
 
