@@ -1,7 +1,7 @@
 Do you speak London?
 ====================
 
-Command line tool for naturla language identification, also known as langID. Currently supporting 4 languages only, English, French, Spanish and Portuguese.
+Command line tool for naturla language identification, also known as langID. Currently supporting 4 languages only, English, Spanish, Portuguese and Arabic.
 
 $ python dysl.py WRITE SOME TEXT HERE TO BE CLASSIFIED
 
