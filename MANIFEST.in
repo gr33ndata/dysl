@@ -2,3 +2,4 @@ include README.md
 include dysl/corpora/corpus-5langs/*.txt
 include dysl/corpora/corpus-esaren/*/*/*.txt
 include dysl/corpora/corpus-esaren.test/*/*.txt
+include docs/*.pdf

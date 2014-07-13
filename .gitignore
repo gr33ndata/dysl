@@ -27,6 +27,15 @@ pip-log.txt
 .tox
 nosetests.xml
 
+# LaTeX
+docs/*.log
+docs/*.aux
+docs/*.gz
+docs/*.cls
+docs/*.tex
+docs/*.bbl
+docs/*.blg
+
 # Translations
 *.mo
 
