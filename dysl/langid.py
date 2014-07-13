@@ -1,3 +1,4 @@
+import sys
 import codecs
 
 #from dyslib.lm import LM
@@ -55,12 +56,14 @@ class LangID(LM):
 
 if __name__ == '__main__':
 
+
     l = LangID(unk=False)
     l.train()
-    text = u'hello, world'
-    lang = l.classify(text)
-    print text, '[ Language:', lang, ']'
 
-    text = u''
+    if len(sys.argv) > 1:
+        text = u' '.join(sys.argv[1:])
+    else:
+        text = u'hello, world'
+
     lang = l.classify(text)
     print text, '[ Language:', lang, ']'
