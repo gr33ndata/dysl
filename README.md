@@ -1,5 +1,4 @@
-Do you speak London?
-====================
+# Do you speak London?
 
 Command line tool for naturla language identification, also known as langID. Currently supporting 4 languages only, English, Spanish, Portuguese and Arabic:
 
@@ -8,6 +7,8 @@ Command line tool for naturla language identification, also known as langID. Cur
 And for more options, and help message
 
 `$ python dysl.py --help`
+
+## Use in Code
 
 You can also use dysl's LangID within your code
 
@@ -20,11 +21,10 @@ l.train()
 text = u'hello, world'
 
 lang = l.classify(text)
-print text, '[ Language:', lang, ']'
+print text, 'Language:', lang
 ```
 
-Contacts
---------
+# Contacts
  
 + Name: [Tarek Amr](http://tarekamr.appspot.com/)
 + Twitter: [@gr33ndata](https://twitter.com/gr33ndata)
