@@ -9,6 +9,19 @@ And for more options, and help message
 
 `$ python dysl.py --help`
 
+You can also use dysl's LangID within your code
+
+`from dysl.langid import LangID
+
+l = LangID()
+l.train()
+
+text = u'hello, world'
+
+lang = l.classify(text)
+print text, '[ Language:', lang, ']'
+`
+
 Contacts
 --------
  
