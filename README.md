@@ -37,11 +37,11 @@ We, however do not rely on domains as they do in langid.py, so you can use a sin
 
 In brief, if you want to classify Valyrian and Klingon for example, your corpus should look somehow as follows:
 
-`/user/me/corpus/domain/klingon/file001.txt`
-`/user/me/corpus/domain/klingon/file002.txt` 
+`/user/me/corpus/domain/klingon/file01.txt`
+`/user/me/corpus/domain/klingon/file02.txt` 
 
-`/user/me/corpus/domain/valyrian/example12.xml`
-`/user/me/corpus/domain/valyrian/example13.xml`
+`/user/me/corpus/domain/valyrian/ex12.xml`
+`/user/me/corpus/domain/valyrian/ex13.xml`
 
 As you can see, domain and filename can be anything, just the folders containing the example files should be named after the languages you want to classify. 
 
