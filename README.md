@@ -61,7 +61,7 @@ print text, 'Language:', lang
 
 ## Unknown Languages
 
-__Experimantal__
+__ /!\ Experimantal /!\ __
 
 By default, we try to classify a given text as one of the languages dysl is trained on. However, by setting `unk=True` we allow dysl to return 'unk' when the given text is not in any of the languages it has seen before. 
 
