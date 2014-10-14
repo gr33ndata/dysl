@@ -37,14 +37,28 @@ We, however do not rely on domains as they do in langid.py, so you can use a sin
 
 In brief, if you want to classify Valyrian and Klingon for example, your coupus should look somehow as follows:
 
-`./corpus/domain/klingon/file1.txt`
-`./corpus/domain/klingon/file2.txt` 
-`./corpus/domain/klingon/myfile.xml`
-`./corpus/domain/valyrian/file001.txt` 
-`./corpus/domain/valyrian/example1.xml`
-`./corpus/domain/valyrian/example2.xml`
+`/user/me/corpus/domain/klingon/file1.txt`
+`/user/me/corpus/domain/klingon/file2.txt` 
+`/user/me/corpus/domain/klingon/myfile.xml`
+`/user/me/corpus/domain/valyrian/file001.txt` 
+`/user/me/corpus/domain/valyrian/example1.xml`
+`/user/me/corpus/domain/valyrian/example2.xml`
 
 As you can see, domain and filename can be anything, just the folders containing the example files should be named after the languages you want to classify. 
+
+Finally, you need to specify the path to the training example in your code.
+
+```python
+from dysl.langid import LangID
+
+l = LangID()
+l.train(root='/user/me/corpus')
+
+text = u'hello, world'
+
+lang = l.classify(text)
+print text, 'Language:', lang
+```
 
 # Contacts
  
