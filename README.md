@@ -12,7 +12,7 @@ And for more options, and help message
 You can also use dysl's LangID within your code
 
 ```python
-from dysl.langid import LangID`
+from dysl.langid import LangID
 
 l = LangID()
 l.train()
