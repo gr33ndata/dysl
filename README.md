@@ -63,7 +63,7 @@ print text, 'Language:', lang
 You can add new training samples to your custom training-set. 
 You do that on two stages.
 
-To add a new text sample:
+To add a new samples:
 
 `l.add_training_sample(text=u'tlhIngan Hol Dajatlha?', lang='Klingon')`
 
