@@ -64,8 +64,10 @@ You can add new training samples to your custom training-set.
 You do that on two stages.
 
 To add a new text sample:
-`l.add_training_sample(text=u'tlhIngan Hol Dajatlha?', lang='Klingon')
-`l.add_training_sample(text=u'jIyajbe', lang='Klingon')
+
+`l.add_training_sample(text=u'tlhIngan Hol Dajatlha?', lang='Klingon')`
+
+`l.add_training_sample(text=u'jIyajbe', lang='Klingon')`
 
 Then to save changes to disk:
 `l.save_training_samples()`
