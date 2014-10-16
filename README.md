@@ -58,6 +58,20 @@ text = u'hello, world'
 lang = l.classify(text)
 print text, 'Language:', lang
 ```
+## Add Training Samples to Your Custom Training Data
+
+You can add new training samples to your custom training-set. 
+You do that on two stages.
+
+To add a new text sample:
+`l.add_training_sample(text=u'tlhIngan Hol Dajatlha?', lang='Klingon')
+`l.add_training_sample(text=u'jIyajbe', lang='Klingon')
+
+Then to save changes to disk:
+`l.save_training_samples()`
+
+Notice that this only works when using custom training-set, 
+adding samples to builtin training-set is not permitted.
 
 ## Unknown Languages (_Experimantal_)
 
