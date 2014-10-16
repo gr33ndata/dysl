@@ -9,8 +9,8 @@ class LangID(LM):
 
     def __init__(self, unk=False):
 
-        # Shall we mark some text as unk
-        # If top languages are too close.
+        # Shall we mark some text as unk,
+        # if top languages are too close?
         self.unk = unk
         self.min_karbasa = 0.08
 
@@ -33,15 +33,26 @@ class LangID(LM):
         #print tokenz
         return tokenz
 
-    def train(self):
+    def train(self, root=''):
 
-        train = Train()
-        corpus = train.get_corpus()
+        self.train = Train(root=root)
+        corpus = self.train.get_corpus()
+
+        # Show loaded Languages
+        #print 'Lang Set: ' + ' '.join(train.get_lang_set())
 
         for item in corpus:
             self.lm.add_doc(doc_id=item[0], doc_terms=self._readfile(item[1]))
 
     
+    def add_training_sample(self, text=u'', lang=''):
+        
+        self.train.add(text=text, lang=lang)
+
+    def save_training_samples(self):
+
+        self.train.save()
+
     def classify(self, text=u''):
 
         text = self.lm.normalize(text)
@@ -67,3 +78,4 @@ if __name__ == '__main__':
 
     lang = l.classify(text)
     print text, '[ Language:', lang, ']'
+

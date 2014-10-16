@@ -5,7 +5,7 @@ def readme():
         return f.read()
 
 setup(name='dysl',
-      version='0.12',
+      version='0.13',
       description='Do you speak London?',
       long_description=readme(),
       url='https://github.com/gr33ndata/dysl',
