@@ -58,7 +58,7 @@ text = u'hello, world'
 lang = l.classify(text)
 print text, 'Language:', lang
 ```
-## Add Training Samples to Your Custom Training Data
+## Adding New Samples to Your Training Data
 
 You can add new training samples to your custom training-set. 
 You do that on two stages.
