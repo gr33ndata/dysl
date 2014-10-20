@@ -61,6 +61,7 @@ class Train:
             for sample in self.temp_train_data[lang]:
                 text = sample + u'\n'
                 f.write(text)
+            f.close()
 
     def visit(self, arg, dirname, names):
         #print dirname
