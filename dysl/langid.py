@@ -69,14 +69,7 @@ if __name__ == '__main__':
 
 
     l = LangID(unk=False)
-    #l.train()
-
-    l.train('/Users/tarekamr/Desktop/dysly')
-
-    l.add_training_sample(text=u'ellohay orldway', lang='pig')
-    #l.save_training_samples()
-    l.save_training_samples(domain='domaingo', filename='zofile.txt')
-    sys.exit('Done!')
+    l.train()
 
     if len(sys.argv) > 1:
         text = u' '.join(sys.argv[1:])
