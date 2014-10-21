@@ -75,12 +75,11 @@ Then to save changes to disk:
 
 _Note_: 
 
-To specify the domain folder name and file name, you can use the following command instead:
-
+By default, a folder name generated from the current timestamp, `/batchTSYYMMDDHHMMSS` is used for the domain, and `file.txt` is used for sample files in language folders. To specify the domain folder name and file name, you can use the following command instead:
 
 `l.save_training_samples(domain='MyDomain', filename='MyFile.txt')`
 
-Notice that this only works when using custom training-set, 
+Notice that only works when using custom training-set, 
 adding samples to builtin training-set is not permitted.
 
 ## Unknown Languages (_Experimantal_)
