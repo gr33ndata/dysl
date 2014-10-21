@@ -47,20 +47,41 @@ class Train:
         else:
             self.temp_train_data[lang].append(text)
 
-    def save(self):
+    def save(self, domain='', filename=''):
+        
         if self.using_builtin_training:
             raise Exception("Failed to save data, use custom training-set instead.")
-        timestamp = datetime.now().strftime("%y%m%d%H%M%S")
-        folder_path = self.root + '/batchTS' + timestamp
-        os.mkdir(folder_path)  
+        
+        if not domain:
+            timestamp = datetime.now().strftime("%y%m%d%H%M%S")
+            folder_path = self.root + '/batchTS' + timestamp
+        else:
+            folder_path = self.root + '/' + domain
+        
+        try:
+            os.mkdir(folder_path)
+        except:
+            pass  
+        
         for lang in self.temp_train_data:
+            
             lang_folder_path = folder_path + '/' + lang
-            os.mkdir(lang_folder_path)
-            filename = lang_folder_path + '/file.txt'
-            f = codecs.open(filename, mode='w', encoding='utf-8')
+            
+            try:
+                os.mkdir(lang_folder_path)
+            except:
+                pass
+            
+            if not filename:
+                filename_and_path = lang_folder_path + '/file.txt'
+            else:
+                filename_and_path = lang_folder_path + '/' + filename
+            
+            f = codecs.open(filename_and_path, mode='w', encoding='utf-8')
             for sample in self.temp_train_data[lang]:
                 text = sample + u'\n'
                 f.write(text)
+            
             f.close()
 
     def visit(self, arg, dirname, names):

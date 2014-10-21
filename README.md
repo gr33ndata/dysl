@@ -73,6 +73,13 @@ Then to save changes to disk:
 
 `l.save_training_samples()`
 
+_Note_: 
+
+To specify the domain folder name and file name, you can use the following command instead:
+
+
+`l.save_training_samples(domain='MyDomain', filename='MyFile.txt')`
+
 Notice that this only works when using custom training-set, 
 adding samples to builtin training-set is not permitted.
 

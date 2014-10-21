@@ -49,9 +49,9 @@ class LangID(LM):
         
         self.train.add(text=text, lang=lang)
 
-    def save_training_samples(self):
+    def save_training_samples(self, domain='', filename=''):
 
-        self.train.save()
+        self.train.save(domain=domain, filename=filename)
 
     def classify(self, text=u''):
 
@@ -69,7 +69,14 @@ if __name__ == '__main__':
 
 
     l = LangID(unk=False)
-    l.train()
+    #l.train()
+
+    l.train('/Users/tarekamr/Desktop/dysly')
+
+    l.add_training_sample(text=u'ellohay orldway', lang='pig')
+    #l.save_training_samples()
+    l.save_training_samples(domain='domaingo', filename='zofile.txt')
+    sys.exit('Done!')
 
     if len(sys.argv) > 1:
         text = u' '.join(sys.argv[1:])
