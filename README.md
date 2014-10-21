@@ -79,7 +79,7 @@ By default, a folder name generated from the current timestamp, `/batchTSYYMMDDH
 
 `l.save_training_samples(domain='MyDomain', filename='MyFile.txt')`
 
-Notice that only works when using custom training-set, 
+Notice that saving new sample data only works when using custom training-set, 
 adding samples to builtin training-set is not permitted.
 
 ## Unknown Languages (_Experimantal_)
