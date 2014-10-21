@@ -4,7 +4,7 @@ Command line tool for naturla language identification, also known as langID. Cur
 
 `$ python dysl.py WRITE SOME TEXT HERE TO BE CLASSIFIED`
 
-And for more options, and help message
+Furthermore, let dysl read from custom training data with your own set of languages. You also can use the CLI to add more samples to your training data. For listing of all CLI options:
 
 `$ python dysl.py --help`
 
