@@ -47,12 +47,13 @@ class LangID(LM):
             self.lm.add_doc(doc_id=item[0], doc_terms=self._readfile(item[1]))
 
     def add_training_sample(self, text=u'', lang=''):
-   
         self.trainer.add(text=text, lang=lang)
 
     def save_training_samples(self, domain='', filename=''):
-
         self.trainer.save(domain=domain, filename=filename)
+
+    def get_lang_set(self):
+        return self.trainer.get_lang_set()
 
     def classify(self, text=u''):
 

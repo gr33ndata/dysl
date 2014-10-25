@@ -1,5 +1,6 @@
 import os
 import codecs
+import time
 from datetime import datetime
 
 class Train:
@@ -32,6 +33,9 @@ class Train:
         self.corpus = []
         self.load()
         return self.corpus
+
+    def get_corpus_path(self):
+        return self.root
 
     def get_lang_set(self):
         return list(self.lang_set)

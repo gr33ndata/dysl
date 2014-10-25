@@ -18,6 +18,13 @@ class TestLangID(unittest.TestCase):
         self.l = LangID(unk=False)
         self.l.train()
 
+    def test_lang_set(self):
+        lang_set = self.l.get_lang_set()
+        lang_set.sort()
+        expected_lang_set = ['en','es','ar','pt']
+        expected_lang_set.sort()       
+        self.assertEqual(lang_set,expected_lang_set)
+
     def test_classify_en(self):
         lang = self.l.classify(u'hello world')
         self.assertEqual(lang,'en')
