@@ -17,12 +17,14 @@ class LangID(LM):
         # LM Parameters
         ngram = 3
         lrpad = u' '
-        verbose=False
-        corpus_mix='l'
+        verbose = False
+        corpus_mix = 'l'
 
-        self.lm = LM(n=ngram, verbose=verbose, lpad=lrpad, rpad=lrpad, 
-                smoothing='Laplace', laplace_gama=0.1, 
+        self.lm = LM(n=ngram, verbose=verbose, lpad=lrpad, rpad=lrpad,
+                smoothing='Laplace', laplace_gama=0.1,
                 corpus_mix=corpus_mix)
+
+        self.trainer = None
 
     def _readfile(self, filename):
 
@@ -35,8 +37,8 @@ class LangID(LM):
 
     def train(self, root=''):
 
-        self.train = Train(root=root)
-        corpus = self.train.get_corpus()
+        self.trainer = Train(root=root)
+        corpus = self.trainer.get_corpus()
 
         # Show loaded Languages
         #print 'Lang Set: ' + ' '.join(train.get_lang_set())
@@ -44,14 +46,13 @@ class LangID(LM):
         for item in corpus:
             self.lm.add_doc(doc_id=item[0], doc_terms=self._readfile(item[1]))
 
-    
     def add_training_sample(self, text=u'', lang=''):
-        
-        self.train.add(text=text, lang=lang)
+   
+        self.trainer.add(text=text, lang=lang)
 
     def save_training_samples(self, domain='', filename=''):
 
-        self.train.save(domain=domain, filename=filename)
+        self.trainer.save(domain=domain, filename=filename)
 
     def classify(self, text=u''):
 
@@ -66,7 +67,6 @@ class LangID(LM):
         return lang
 
 if __name__ == '__main__':
-
 
     l = LangID(unk=False)
     l.train()

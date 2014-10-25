@@ -7,7 +7,7 @@ def decode_input(text_in):
     if type(text_in) == list:
         text_out = u' '.join([t.decode('utf-8') for t in text_in])
     else:
-        text_out = text_in.decode('utf-8') 
+        text_out = text_in.decode('utf-8')
     return text_out
 
 def main():
@@ -25,7 +25,7 @@ def main():
     l.train(root=args.corpus)
 
     input_text = decode_input(args.input)
-    
+
     if args.lang and input_text:
         l.add_training_sample(text=input_text, lang=args.lang)
         l.save_training_samples()
@@ -37,7 +37,7 @@ def main():
     else:
         parser.print_help()
         sys.exit('\n')
-    
+
 if __name__ == '__main__':
     try:
         main()
