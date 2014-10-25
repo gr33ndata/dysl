@@ -25,6 +25,7 @@ class LangID(LM):
                 corpus_mix=corpus_mix)
 
         self.trainer = None
+        self.training_timestamp = 0
 
     def _readfile(self, filename):
 
@@ -45,6 +46,16 @@ class LangID(LM):
 
         for item in corpus:
             self.lm.add_doc(doc_id=item[0], doc_terms=self._readfile(item[1]))
+
+        # Save training timestamp
+        self.training_timestamp = self.trainer.get_last_modified()
+
+    def is_training_modified(self):
+        last_modified = self.trainer.get_last_modified()
+        if last_modified > self.training_timestamp:
+            return True
+        else:
+            return False
 
     def add_training_sample(self, text=u'', lang=''):
         self.trainer.add(text=text, lang=lang)

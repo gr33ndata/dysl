@@ -82,6 +82,18 @@ By default, a folder name generated from the current timestamp, `/batchTSYYMMDDH
 Notice that saving new sample data only works when using custom training-set, 
 adding samples to builtin training-set is not permitted.
 
+# Retrain When Modified
+
+Let's say you are going to build a daemon that calls uses dysl. Normally, you would train dysl when starting then use that data for any further language classifications. 
+
+What if some other process, or human, updates the training dataset during that? How will your daemon know that it neads to retrain again?
+
+Well, in LangID, there is a method, `is_training_modified()`, that can tell you if the training data was modified after it was first trained on it or not:
+
+`l.is_training_modified()`
+
+It returns `True` if the data was modified, and `False` otherwise. Of course, when using the builtin dataset, it will always return `False` as it not allowed to be modified.
+
 ## Unknown Languages (_Experimantal_)
 
 By default, we try to classify a given text as one of the languages dysl is trained on. However, by setting `unk=True` we allow dysl to return 'unk' when the given text is not in any of the languages it has seen before. 

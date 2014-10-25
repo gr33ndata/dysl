@@ -88,6 +88,13 @@ class Train:
             
             f.close()
 
+    def get_last_modified(self):
+        # Get corpus last modified timestamp
+        if self.using_builtin_training:
+            return 0
+        else:
+            return os.path.getmtime(self.root)
+
     def visit(self, arg, dirname, names):
         #print dirname
         path = dirname.split('/')
