@@ -10,7 +10,7 @@ You can let dysl read from custom training data with your own set of languages.
 
 You also can use the CLI to add more samples to your training data. 
 
-`$ python dysl.py --corpus /PATH/TO/TRAINING/DATA --lang en Here is some text in English for dysl to add to its training data`
+`$ python dysl.py --corpus /PATH/TO/TRAINING/DATA --lang en Here you are some text in English to be add to your training data`
 
 To show the currently installed version:
 
