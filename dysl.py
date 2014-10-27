@@ -23,18 +23,20 @@ def main():
     #print args
 
     unk = False if args.unk == 'n' else True
-    l = LangID(unk=unk)
-    l.train(root=args.corpus)
 
     input_text = decode_input(args.input)
 
     if args.version:
         sys.exit(__version__)
     elif args.lang and input_text:
+        l = LangID(unk=unk)
+        l.train(root=args.corpus)
         l.add_training_sample(text=input_text, lang=args.lang)
         l.save_training_samples()
         sys.exit('Training Sample for "%s" added successfully.\n' % args.lang)
     elif input_text:
+        l = LangID(unk=unk)
+        l.train(root=args.corpus)
         lang = l.classify(input_text)
         print 'Input text:', input_text
         print 'Language:', lang
