@@ -2,9 +2,21 @@
 
 Command line tool for naturla language identification, also known as langID. Currently supporting 4 languages only, English, Spanish, Portuguese and Arabic:
 
-`$ python dysl.py WRITE SOME TEXT HERE TO BE CLASSIFIED`
+`$ python dysl.py Can you tell if this is in English?`
 
-Furthermore, let dysl read from custom training data with your own set of languages. You also can use the CLI to add more samples to your training data. For listing of all CLI options:
+You can let dysl read from custom training data with your own set of languages. 
+
+`$ python dysl.py --corpus /PATH/TO/TRAINING/DATA ¿Puede usted decir si esto es en español?`
+
+You also can use the CLI to add more samples to your training data. 
+
+`$ python dysl.py --corpus /PATH/TO/TRAINING/DATA --lang en Here is some text in English for dysl to add to its training data`
+
+To show the currently installed version:
+
+`$ python dysl.py --version`
+
+For listing of all CLI options:
 
 `$ python dysl.py --help`
 
