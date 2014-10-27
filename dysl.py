@@ -1,6 +1,7 @@
 import sys
 from argparse import ArgumentParser
 from dysl.langid import LangID
+from dysl.version import __version__
 
 def decode_input(text_in):
     return u' '.join(text_in)
@@ -13,6 +14,7 @@ def decode_input(text_in):
 def main():
 
     parser = ArgumentParser(description='Do you speak London? A library for Natural Language Identification.')
+    parser.add_argument('--version', action='store_true', help='Show version')
     parser.add_argument('--unk', choices=['y','n'], default='y', help='Input text to classify')
     parser.add_argument('--corpus', default='', help='Specify path to custom training-set')
     parser.add_argument('--lang', help='Add training sample for the language specified')
@@ -26,7 +28,9 @@ def main():
 
     input_text = decode_input(args.input)
 
-    if args.lang and input_text:
+    if args.version:
+        sys.exit(__version__)
+    elif args.lang and input_text:
         l.add_training_sample(text=input_text, lang=args.lang)
         l.save_training_samples()
         sys.exit('Training Sample for "%s" added successfully.\n' % args.lang)
