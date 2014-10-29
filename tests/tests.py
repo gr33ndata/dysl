@@ -46,6 +46,14 @@ class TestSocialLM(unittest.TestCase):
     def setUp(self):
         self.lm = SocialLM()
 
+    def test_tokenize_c(self):
+        tokz = SocialLM.tokenize('hello', mode='c')
+        self.assertEqual(tokz,['h','e','l','l','o'])
+
+    def test_tokenize_w(self):
+        tokz = SocialLM.tokenize('hello world', mode='w')
+        self.assertEqual(tokz,['hello','world'])
+
     def test_is_mention_at(self):
         ism = SocialLM.is_mention_line('@gr33ndata')
         self.assertEqual(ism,True)
@@ -62,7 +70,7 @@ class TestSocialLM(unittest.TestCase):
         ism = SocialLM.is_mention_line('This is https://www.yahoo.com')
         self.assertEqual(ism,False)
 
-    def test_normalize(self):
+    def test_normalize_mention_lower(self):
         norm_txt = self.lm.normalize(u'Dear @user How Are You?')
         self.assertEqual(norm_txt, u'dear how are you?')
 
