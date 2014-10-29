@@ -28,7 +28,11 @@ class LangID(LM):
         self.training_timestamp = 0
 
     def _readfile(self, filename):
+        """ Reads a file a utf-8 file,
+            and retuns character tokens.
 
+            :param filename: Name of file to be read. 
+        """
         f = codecs.open(filename, encoding='utf-8')
         filedata = f.read()
         f.close()
@@ -37,6 +41,10 @@ class LangID(LM):
         return tokenz
 
     def train(self, root=''):
+        """ Trains our Language Model.
+
+            :param root: Path to training data. 
+        """
 
         self.trainer = Train(root=root)
         corpus = self.trainer.get_corpus()
@@ -51,6 +59,12 @@ class LangID(LM):
         self.training_timestamp = self.trainer.get_last_modified()
 
     def is_training_modified(self):
+        """ Returns `True` if training data 
+            was modified since last training.
+            Returns `False` otherwise, 
+            or if using builtin training data. 
+        """
+
         last_modified = self.trainer.get_last_modified()
         if last_modified > self.training_timestamp:
             return True
@@ -58,15 +72,37 @@ class LangID(LM):
             return False
 
     def add_training_sample(self, text=u'', lang=''):
+        """ Initial step for adding new sample to training data.
+            You need to call `save_training_samples()` afterwards.
+
+            :param text: Sample text to be added.
+            :param lang: Language label for the input text.
+        """
         self.trainer.add(text=text, lang=lang)
 
     def save_training_samples(self, domain='', filename=''):
+        """ Saves data previously added via add_training_sample().
+            Data saved in folder specified by Train.get_corpus_path().
+
+            :param domain: Name for domain folder.
+                           If not set, current timestamp will be used.
+            :param filename: Name for file to save data in.
+                             If not set, file.txt will be used.
+
+            Check the README file for more information about Domains
+        """
         self.trainer.save(domain=domain, filename=filename)
 
     def get_lang_set(self):
+        """ Returns a list of languages in training data.
+        """
         return self.trainer.get_lang_set()
 
     def classify(self, text=u''):
+        """ Predicts the Language of a given text.
+
+            :param text: Unicode text to be classified.
+        """
 
         text = self.lm.normalize(text)
         tokenz = LM.tokenize(text, mode='c')
