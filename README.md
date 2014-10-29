@@ -116,6 +116,5 @@ By default, we try to classify a given text as one of the languages dysl is trai
 
 # Contacts
  
-+ Name: [Tarek Amr](http://tarekamr.appspot.com/)
-+ Twitter: [@gr33ndata](https://twitter.com/gr33ndata)
++ Project Owner: [Tarek Amr](http://tarekamr.appspot.com/)
  
