@@ -5,6 +5,11 @@ class SocialLM(LM):
 
     @classmethod
     def tokenize(self, text, mode='c'):
+        """ Converts text into tokens
+
+            :param text: string to be tokenized
+            :param mode: split into chars (c) or words (w)
+        """
         if mode == 'c':
             return [ch for ch in text]
         else:
@@ -16,11 +21,17 @@ class SocialLM(LM):
         return float(probs[1] - probs[0]) / float(probs[-1] - probs[0])
 
     def classify(self, text=u''):
+        """ Predicts the Language of a given text.
+
+            :param text: Unicode text to be classified.
+        """
         result = self.calculate(doc_terms=self.tokenize(text))
         #return (result['calc_id'], result)
         return (result['calc_id'], self.karbasa(result))
 
     def is_mention_line(self, word):
+        """ Detects links and mentions
+        """
         if word.startswith('@'):
             return True
         elif word.startswith('http://'):

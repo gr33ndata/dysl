@@ -4,6 +4,7 @@ import codecs
 #from dyslib.lm import LM
 from social import SocialLM as LM
 from corpora.corpuslib import Train
+from utils import decode_input
 
 #class LangID(LM):
 class LangID:
@@ -123,7 +124,7 @@ if __name__ == '__main__':
     l.train()
 
     if len(sys.argv) > 1:
-        text = u' '.join(sys.argv[1:])
+        text = decode_input(sys.argv[1:])
     else:
         text = u'hello, world'
 
