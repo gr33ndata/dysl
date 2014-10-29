@@ -29,6 +29,7 @@ class SocialLM(LM):
         #return (result['calc_id'], result)
         return (result['calc_id'], self.karbasa(result))
 
+    @classmethod
     def is_mention_line(self, word):
         """ Detects links and mentions
         """

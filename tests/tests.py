@@ -41,6 +41,30 @@ class TestLangID(unittest.TestCase):
         lang2 = self.lm2.classify(u'this is la fiesta del mundo')
         self.assertEqual(lang2,'unk')
 
-             
+class TestSocialLM(unittest.TestCase):
+
+    def setUp(self):
+        self.lm = SocialLM()
+
+    def test_is_mention_at(self):
+        ism = SocialLM.is_mention_line('@gr33ndata')
+        self.assertEqual(ism,True)
+
+    def test_is_mention_http(self):
+        ism = SocialLM.is_mention_line('http://www.yahoo.com')
+        self.assertEqual(ism,True)
+
+    def test_is_mention_https(self):
+        ism = SocialLM.is_mention_line('https://www.yahoo.com')
+        self.assertEqual(ism,True)
+
+    def test_is_not_mention(self):
+        ism = SocialLM.is_mention_line('This is https://www.yahoo.com')
+        self.assertEqual(ism,False)
+
+    def test_normalize(self):
+        norm_txt = self.lm.normalize(u'Dear @user How Are You?')
+        self.assertEqual(norm_txt, u'dear how are you?')
+
 if __name__ == '__main__':
     unittest.main()
