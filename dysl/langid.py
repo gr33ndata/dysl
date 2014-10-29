@@ -5,7 +5,8 @@ import codecs
 from social import SocialLM as LM
 from corpora.corpuslib import Train
 
-class LangID(LM):
+#class LangID(LM):
+class LangID:
 
     def __init__(self, unk=False):
 
