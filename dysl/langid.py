@@ -7,6 +7,8 @@ from corpora.corpuslib import Train
 
 #class LangID(LM):
 class LangID:
+    """ Language Identification Class
+    """
 
     def __init__(self, unk=False):
 
@@ -109,7 +111,7 @@ class LangID:
         tokenz = LM.tokenize(text, mode='c')
         result = self.lm.calculate(doc_terms=tokenz)
         #print 'Karbasa:', self.karbasa(result)
-        if self.unk and self.karbasa(result) < self.min_karbasa:
+        if self.unk and self.lm.karbasa(result) < self.min_karbasa:
             lang = 'unk'
         else:
             lang = result['calc_id']
