@@ -1,3 +1,8 @@
+""" Language Identification
+
+    Author: Tarek Amr (@gr33ndata)
+"""
+
 import sys
 import codecs
 
@@ -25,17 +30,18 @@ class LangID:
         corpus_mix = 'l'
 
         self.lm = LM(n=ngram, verbose=verbose, lpad=lrpad, rpad=lrpad,
-                smoothing='Laplace', laplace_gama=0.1,
-                corpus_mix=corpus_mix)
+                     smoothing='Laplace', laplace_gama=0.1,
+                     corpus_mix=corpus_mix)
 
         self.trainer = None
         self.training_timestamp = 0
 
-    def _readfile(self, filename):
+    @classmethod
+    def _readfile(cls, filename):
         """ Reads a file a utf-8 file,
             and retuns character tokens.
 
-            :param filename: Name of file to be read. 
+            :param filename: Name of file to be read.
         """
         f = codecs.open(filename, encoding='utf-8')
         filedata = f.read()
@@ -47,7 +53,7 @@ class LangID:
     def train(self, root=''):
         """ Trains our Language Model.
 
-            :param root: Path to training data. 
+            :param root: Path to training data.
         """
 
         self.trainer = Train(root=root)
@@ -63,10 +69,10 @@ class LangID:
         self.training_timestamp = self.trainer.get_last_modified()
 
     def is_training_modified(self):
-        """ Returns `True` if training data 
+        """ Returns `True` if training data
             was modified since last training.
-            Returns `False` otherwise, 
-            or if using builtin training data. 
+            Returns `False` otherwise,
+            or if using builtin training data.
         """
 
         last_modified = self.trainer.get_last_modified()
@@ -93,7 +99,7 @@ class LangID:
             :param filename: Name for file to save data in.
                              If not set, file.txt will be used.
 
-            Check the README file for more information about Domains
+            Check the README file for more information about Domains.
         """
         self.trainer.save(domain=domain, filename=filename)
 
@@ -124,10 +130,10 @@ if __name__ == '__main__':
     l.train()
 
     if len(sys.argv) > 1:
-        text = decode_input(sys.argv[1:])
+        text_in = decode_input(sys.argv[1:])
     else:
-        text = u'hello, world'
+        text_in = u'hello, world'
 
-    lang = l.classify(text)
-    print text, '[ Language:', lang, ']'
+    lang_res = l.classify(text_in)
+    print text_in, '[ Language:', lang_res, ']'
 
