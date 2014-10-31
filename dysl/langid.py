@@ -81,6 +81,12 @@ class LangID:
         else:
             return False
 
+    def was_training_modified(self):
+        """ For Grammar Nazis, 
+            just alias for is_training_modified()
+        """
+        return self.is_training_modified()
+
     def add_training_sample(self, text=u'', lang=''):
         """ Initial step for adding new sample to training data.
             You need to call `save_training_samples()` afterwards.
