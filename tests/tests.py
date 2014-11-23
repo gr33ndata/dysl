@@ -5,7 +5,7 @@ import sys
 import unittest
 
 tests_path = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(tests_path + '/../')
+sys.path.append(os.path.join(tests_path, '..'))
 
 from dysl.corpora.corpuslib.train import Train
 from dysl.langid import LangID
