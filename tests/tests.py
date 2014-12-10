@@ -87,13 +87,10 @@ class TestTrain(unittest.TestCase):
         t = Train()
         corpus = t.get_corpus()
         self.assertEqual(len(corpus), 36)
-
-    def test_builtin_corpus_languages(self):
-        t = Train()
-        t.get_corpus()
         lang_set = t.get_lang_set()
-        self.assertItemsEqual(lang_set, ['en', 'es', 'ar', 'pt'])
-
+        expected_lang_set = ['en', 'es', 'ar', 'pt']
+        self.assertItemsEqual(lang_set, expected_lang_set)
+        
     def test_using_user_corpus(self):
         t = Train(root='/some/file/path')
         self.assertEqual(t.using_builtin_training, False)
