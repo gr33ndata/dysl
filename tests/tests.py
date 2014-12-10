@@ -79,13 +79,24 @@ class TestTrain(unittest.TestCase):
     def setUp(self):
         pass
 
-    def test_using_builtin(self):
+    def test_using_builtin_corpus(self):
         t = Train()
         self.assertEqual(t.using_builtin_training, True)
+
+    def test_builtin_corpus_files(self):
+        t = Train()
         corpus = t.get_corpus()
         self.assertEqual(len(corpus), 36)
+
+    def test_builtin_corpus_languages(self):
+        t = Train()
+        t.get_corpus()
         lang_set = t.get_lang_set()
         self.assertItemsEqual(lang_set, ['en', 'es', 'ar', 'pt'])
+
+    def test_using_user_corpus(self):
+        t = Train(root='/some/file/path')
+        self.assertEqual(t.using_builtin_training, False)
 
 if __name__ == '__main__':
     unittest.main()
