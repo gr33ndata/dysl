@@ -74,5 +74,18 @@ class TestSocialLM(unittest.TestCase):
         norm_txt = self.lm.normalize(u'Dear @user How Are You?')
         self.assertEqual(norm_txt, u'dear how are you?')
 
+class TestTrain(unittest.TestCase):
+
+    def setUp(self):
+        pass
+
+    def test_using_builtin(self):
+        t = Train()
+        self.assertEqual(t.using_builtin_training, True)
+        corpus = t.get_corpus()
+        self.assertEqual(len(corpus), 36)
+        lang_set = t.get_lang_set()
+        self.assertItemsEqual(lang_set, ['en', 'es', 'ar', 'pt'])
+
 if __name__ == '__main__':
     unittest.main()
