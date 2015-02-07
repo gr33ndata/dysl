@@ -114,6 +114,17 @@ By default, we try to classify a given text as one of the languages dysl is trai
 
 ***
 
+# Contribution
+
+To contribute to joblib, first create an account on [github](http://github.com/). Once this is done, fork the [dysl repository]
+(http://github.com/joblib/joblib) to have you own repository,
+clone it using 'git clone' on the computers where you want to work. Make
+your changes in your clone, push them to your github account, test them
+on several computer, and when you are happy with them, send a pull
+request to the main repository.
+
+***
+
 # Contacts
  
 + Project Owner: [Tarek Amr](http://tarekamr.appspot.com/)
