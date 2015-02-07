@@ -116,7 +116,7 @@ By default, we try to classify a given text as one of the languages dysl is trai
 
 # Contribution
 
-To contribute to dysl, first create an account on [github](http://github.com/). Once this is done, fork the [dysl repository]
+To contribute to *dysl*, first create an account on [github](http://github.com/). Once this is done, fork the [dysl repository]
 (http://github.com/gr33ndata/dysl) to have you own repository,
 clone it using 'git clone' on the computers where you want to work. Make
 your changes in your clone, push them to your github account, test them
